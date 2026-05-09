@@ -26,3 +26,28 @@ func _on_connected_ok() -> void:
 	
 func _on_connected_fail() -> void:
 	print("连接服务器失败")
+	Server.alreadyCreateClient = false
+
+#断开客户端连接
+func close_client() -> bool:
+	var peer = multiplayer.multiplayer_peer
+	if peer == null:
+		return false
+	
+	#关闭服务器
+	if multiplayer.get_unique_id() == 1:
+		push_error("本机器为服务端口，不是客户端口，不可使用客户端口关闭")
+		return false
+	
+	#断开信号连接
+	multiplayer.connected_to_server.disconnect(_on_connected_ok)
+	multiplayer.connection_failed.disconnect(_on_connected_fail)
+
+	peer.close()
+	#清空网络设置
+	multiplayer.multiplayer_peer = null
+	if multiplayer.multiplayer_peer != null:
+		return false
+	
+	print("已断开连接")
+	return true
