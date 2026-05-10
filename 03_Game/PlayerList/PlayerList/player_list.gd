@@ -15,8 +15,8 @@ func _get_server_player_list()			-> void:
 	
 #同步网络玩家数据
 func _sync_with_player_list() 			-> void:
-	if player_list != Server.ServerRunning.player_list:
-		player_list = Server.ServerRunning.player_list
+	if player_list != Server.get_player_list():
+		player_list = Server.get_player_list()
 	
 	#刷新玩家列表
 	for single_player_instantion in PlayerList:

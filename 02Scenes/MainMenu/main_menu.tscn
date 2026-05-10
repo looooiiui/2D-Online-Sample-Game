@@ -4,9 +4,10 @@
 [ext_resource type="Script" uid="uid://jp5lkfu84nwj" path="res://02Scenes/MainMenu/WindowsMenu/windows_menu.gd" id="2_tx7fq"]
 [ext_resource type="Script" uid="uid://dq4rxnmt527ku" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/OnlineWindows/online_windows.gd" id="3_5k28i"]
 [ext_resource type="Script" uid="uid://dyrfv2w8uqo6i" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/HostWindows/host.gd" id="4_jhj0f"]
+[ext_resource type="PackedScene" uid="uid://cwrgaoibq5i8j" path="res://03_Game/PlayerList/PlayerList/player_list.tscn" id="5_0k5lx"]
 [ext_resource type="PackedScene" uid="uid://kms37wdg43jk" path="res://03_Game/PlayerList/single_player.tscn" id="5_2tkww"]
 [ext_resource type="Script" uid="uid://cr3py577bv4lc" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/JoinWindows/join.gd" id="5_7ym5f"]
-[ext_resource type="Script" uid="uid://by8t1dlslnntl" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/HostWindows/PlayerList/PlayerList/player_list.gd" id="5_vf6a1"]
+[ext_resource type="Script" uid="uid://by8t1dlslnntl" path="res://03_Game/PlayerList/PlayerList/player_list.gd" id="5_vf6a1"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oajpe"]
 
@@ -127,9 +128,24 @@ text = "关闭服务器"
 
 [node name="ButtonGroup" type="Control" parent="MainMenu/WindowsMenu/OnlineGroup/Host" unique_id=690466477]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
 offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="StartGame" type="Button" parent="MainMenu/WindowsMenu/OnlineGroup/Host/ButtonGroup" unique_id=1614691605]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_right = 68.0
+offset_bottom = 42.0
+grow_horizontal = 2
+text = "开始游戏"
 
 [node name="LabelGroup" type="Control" parent="MainMenu/WindowsMenu/OnlineGroup/Host" unique_id=1015943202]
 layout_mode = 3
@@ -137,20 +153,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PlayerList" type="Control" parent="MainMenu/WindowsMenu/OnlineGroup/Host" unique_id=2102574400]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="PlayerList" type="VBoxContainer" parent="MainMenu/WindowsMenu/OnlineGroup/Host/PlayerList" unique_id=1689219983]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_vf6a1")
-single_player = ExtResource("5_2tkww")
-
-[node name="ListName" type="Label" parent="MainMenu/WindowsMenu/OnlineGroup/Host/PlayerList/PlayerList" unique_id=1078039539]
-layout_mode = 2
-text = "当前玩家列表"
+[node name="PlayerList" parent="MainMenu/WindowsMenu/OnlineGroup/Host" unique_id=1434962450 instance=ExtResource("5_0k5lx")]
 
 [node name="Join" type="Window" parent="MainMenu/WindowsMenu/OnlineGroup" unique_id=1306000376 node_paths=PackedStringArray("Search_Label")]
 oversampling_override = 1.0
@@ -203,4 +206,5 @@ text = "当前玩家列表"
 [connection signal="pressed" from="MainMenu/WindowsMenu/OnlineGroup/OnlineWindows/ButtonGroup/VBox/CreateServer" to="MainMenu/WindowsMenu/OnlineGroup/OnlineWindows" method="_on_create_server_pressed"]
 [connection signal="pressed" from="MainMenu/WindowsMenu/OnlineGroup/OnlineWindows/ButtonGroup/VBox/JoinServer" to="MainMenu/WindowsMenu/OnlineGroup/OnlineWindows" method="_on_join_server_pressed"]
 [connection signal="pressed" from="MainMenu/WindowsMenu/OnlineGroup/Host/Exit" to="MainMenu/WindowsMenu/OnlineGroup/Host" method="_on_exit_pressed"]
+[connection signal="pressed" from="MainMenu/WindowsMenu/OnlineGroup/Host/ButtonGroup/StartGame" to="MainMenu/WindowsMenu/OnlineGroup/Host" method="_on_start_game_pressed"]
 [connection signal="pressed" from="MainMenu/WindowsMenu/OnlineGroup/Join/Exit" to="MainMenu/WindowsMenu/OnlineGroup/Join" method="_on_exit_pressed"]

@@ -22,6 +22,8 @@ MainGameManger="*uid://ct6agwpbhbd30"
 
 [display]
 
+window/size/viewport_width=1600
+window/size/viewport_height=800
 window/stretch/scale=0.8
 
 [dotnet]

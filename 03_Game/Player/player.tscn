@@ -3,15 +3,8 @@
 [ext_resource type="Script" uid="uid://ctjhoql4ktbim" path="res://03_Game/Player/player.gd" id="1_ok6uv"]
 [ext_resource type="Texture2D" uid="uid://co30r6ae146hy" path="res://icon.svg" id="2_mg1oj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xhyas"]
-size = Vector2(21, 21)
-
 [node name="Player" type="CharacterBody2D" unique_id=1394657161]
 script = ExtResource("1_ok6uv")
-
-[node name="CollBody" type="CollisionShape2D" parent="." unique_id=409257305]
-scale = Vector2(6.09, 6.09)
-shape = SubResource("RectangleShape2D_xhyas")
 
 [node name="SPRITE" type="Node2D" parent="." unique_id=1574763310]
 
