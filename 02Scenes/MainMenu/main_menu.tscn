@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://kms37wdg43jk" path="res://03_Game/PlayerList/single_player.tscn" id="5_2tkww"]
 [ext_resource type="Script" uid="uid://cr3py577bv4lc" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/JoinWindows/join.gd" id="5_7ym5f"]
 [ext_resource type="Script" uid="uid://by8t1dlslnntl" path="res://03_Game/PlayerList/PlayerList/player_list.gd" id="5_vf6a1"]
+[ext_resource type="PackedScene" uid="uid://bb6bv047gdbw3" path="res://03_Game/Server/PlayerChatBar/player_char_bar.tscn" id="6_af6no"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oajpe"]
 
@@ -155,12 +156,21 @@ offset_bottom = 40.0
 
 [node name="PlayerList" parent="MainMenu/WindowsMenu/OnlineGroup/Host" unique_id=1434962450 instance=ExtResource("5_0k5lx")]
 
+[node name="PlayerCharBar" parent="MainMenu/WindowsMenu/OnlineGroup/Host" unique_id=636911949 instance=ExtResource("6_af6no")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -68.0
+offset_top = 46.0
+offset_right = -28.0
+offset_bottom = 86.0
+grow_horizontal = 2
+
 [node name="Join" type="Window" parent="MainMenu/WindowsMenu/OnlineGroup" unique_id=1306000376 node_paths=PackedStringArray("Search_Label")]
 oversampling_override = 1.0
 title = "加入游戏"
 initial_position = 1
 size = Vector2i(800, 400)
-visible = false
 script = ExtResource("5_7ym5f")
 Search_Label = NodePath("Search")
 
@@ -199,6 +209,12 @@ single_player = ExtResource("5_2tkww")
 [node name="ListName" type="Label" parent="MainMenu/WindowsMenu/OnlineGroup/Join/PlayerList/PlayerList" unique_id=2047617906]
 layout_mode = 2
 text = "当前玩家列表"
+
+[node name="PlayerCharBar" parent="MainMenu/WindowsMenu/OnlineGroup/Join" unique_id=1596052570 instance=ExtResource("6_af6no")]
+offset_left = 277.0
+offset_top = 51.0
+offset_right = 317.0
+offset_bottom = 91.0
 
 [connection signal="pressed" from="MainMenu/MainMenu/StyleMenu/ButtonGroup/MainButton/Start" to="MainMenu/WindowsMenu/OnlineGroup/OnlineWindows" method="_on_start_pressed"]
 [connection signal="pressed" from="MainMenu/MainMenu/StyleMenu/ButtonGroup/MainButton/Quit" to="MainMenu/MainMenu/StyleMenu/ButtonGroup/MainButton" method="_on_quit_pressed"]

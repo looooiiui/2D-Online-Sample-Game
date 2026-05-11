@@ -21,7 +21,6 @@ sources/1 = SubResource("TileSetAtlasSource_0slbb")
 
 [node name="Multiplayer" type="Node2D" unique_id=796322474]
 script = ExtResource("1_0slbb")
-PlayerScene = ExtResource("1_kuglq")
 
 [node name="Map" type="Node2D" parent="." unique_id=1598481827]
 
@@ -31,4 +30,4 @@ tile_set = SubResource("TileSet_tw4pk")
 
 [node name="Players" type="Node2D" parent="." unique_id=2074602333]
 script = ExtResource("4_npglw")
-player = ExtResource("1_kuglq")
+PlayerScene = ExtResource("1_kuglq")

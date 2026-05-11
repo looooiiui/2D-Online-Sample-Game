@@ -2,6 +2,8 @@ extends Node2D
 
 @export var player_position_dic:		Dictionary[String, Vector2]		= {}
 @export var player_list:				Array[String]					= []
+@export var player_chat_messages:		Array[String]					= []
+@export var max_chat_num:				int								= 10
 
 #服务器主玩家地址
 var server_position: 					Vector2							= Vector2(0, 0)
@@ -9,6 +11,12 @@ var server_position: 					Vector2							= Vector2(0, 0)
 func sync_with_player_position_dic(send_position: Vector2 = Vector2(0, 0)):
 	_sync_with_player_position_dic.rpc(send_position)
 
+func send_player_message(msg: String):
+	# 存入格式 [player_id] : information
+	var send_msg = "[" + str(multiplayer.get_unique_id()) + "]: " + msg
+	rpc_player_chat(send_msg)
+	rpc_player_chat.rpc(send_msg)
+	
 #任意端口发送位置
 @rpc("any_peer", "unreliable")
 func _sync_with_player_position_dic(send_position: Vector2 = Vector2(0, 0)) 				-> void:
@@ -33,7 +41,16 @@ func player_list_get(get_player_position_dic: Dictionary) 				-> void:
 	# 服务器端发送玩家列表
 	if multiplayer.get_unique_id() != 1:
 		player_position_dic = get_player_position_dic
-	
+		
+# 玩家聊天信息广播
+@rpc("any_peer", "reliable")
+func rpc_player_chat(msg: String):
+	# 存入格式 [player_id] : information
+	player_chat_messages.append(msg)
+	# 限制消息存储限制
+	if player_chat_messages.size() > max_chat_num:
+		player_chat_messages.pop_front()
+		
 #客户端自检测
 func _detect_connect()				-> void:
 	## 检测联机节点
@@ -42,6 +59,7 @@ func _detect_connect()				-> void:
 		if player_list != []:
 			player_list.clear()
 			player_position_dic.clear()
+			player_chat_messages.clear()
 		return
 	
 	# 这里检测对等体是否为空或者本地离线对等体，清空玩家列表
@@ -49,6 +67,7 @@ func _detect_connect()				-> void:
 		if player_list != []:
 			player_list.clear()
 			player_position_dic.clear()
+			player_chat_messages.clear()
 		return
 	
 	var state = multiplayer.multiplayer_peer.get_connection_status()
@@ -58,3 +77,4 @@ func _detect_connect()				-> void:
 		if player_list != []:
 			player_list.clear()
 			player_position_dic.clear()
+			player_chat_messages.clear()

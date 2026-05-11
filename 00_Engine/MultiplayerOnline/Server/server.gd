@@ -80,7 +80,7 @@ func change_all_scene(path: String) -> void:
 
 # 得到玩家列表
 func get_player_list()				-> Array:
-	return ServerRunning.player_list
+	return ServerRunning.player_list.duplicate()
 	
 # 得到玩家位置信息字典
 func get_player_position_dic()						-> Dictionary:
@@ -88,8 +88,24 @@ func get_player_position_dic()						-> Dictionary:
 
 func change_main_player_position(main_position: Vector2)			-> void:
 	GameRunning.server_position = main_position
+	
+# 发送信息
+func send_message(msg: String) 		-> void:
+	GameRunning.send_player_message(msg)
+	
+# 获取玩家信息列表
+func get_player_chat_list() 		-> Array:
+	return GameRunning.player_chat_messages.duplicate()
 
-#切换场景广播
+# 连接状态
+func is_connect() -> bool:
+	var peer = multiplayer.multiplayer_peer
+	if peer == null or peer is OfflineMultiplayerPeer:
+		return false
+
+	return peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED
+	
+# 切换场景广播
 @rpc("any_peer", "reliable")
 func rpc_change_scene(path: String):
 	get_tree().change_scene_to_file(path)
