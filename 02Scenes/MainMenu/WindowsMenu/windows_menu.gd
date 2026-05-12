@@ -6,8 +6,7 @@ extends CanvasLayer
 
 func _ready() -> void:
 	_windows_initialize()
-
-
+	
 func _process(delta: float) -> void:
 	pass
 

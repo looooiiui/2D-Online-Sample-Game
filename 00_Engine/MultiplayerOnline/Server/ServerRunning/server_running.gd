@@ -44,7 +44,20 @@ func online_player_disconnect(peer_id: int)						-> void:
 		player_list.erase(str(peer_id))
 		# 服务器端发送玩家列表
 		player_list_get.rpc(player_list)
-		pass
+
+		# 清理玩家数据
+		var game = get_parent().GameRunning
+		if game:
+			# 擦除玩家字典与属性
+			if game.player_position_dic.has(peer_id):
+				game.player_position_dic.erase(peer_id)
+			if game.player_information.has(peer_id):
+				game.player_information.erase(peer_id)
+				
+			# 重新发送玩家数据同步
+			game.player_list_get.rpc(game.player_position_dic)
+			game.player_list_information.rpc(game.player_information)
+
 
 ## 统一发送玩家列表
 ## @rpc("authority", "reliable")
@@ -86,4 +99,6 @@ func _detect_connect()				-> void:
 	if state == multiplayer.multiplayer_peer.CONNECTION_DISCONNECTED:
 		if player_list != []:
 			player_list.clear()
+			
+
 	

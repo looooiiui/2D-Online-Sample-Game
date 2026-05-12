@@ -53,7 +53,6 @@ func close_serve() -> bool:
 	multiplayer.peer_connected.disconnect(_on_peer_connect)
 	multiplayer.peer_disconnected.disconnect(_on_peer_disconnect)
 	
-		
 	peer.close()
 	#清空网络设置
 	multiplayer.multiplayer_peer = null

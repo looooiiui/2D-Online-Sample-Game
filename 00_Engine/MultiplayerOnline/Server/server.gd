@@ -65,10 +65,14 @@ func _signal_initialize()					-> void:
 func _on_client_connect_failed()			-> void:
 	alreadyCreateClient = false
 	
-# 同步玩家信息
-func sync_information(send_position: Vector2)-> void:
+# 同步玩家位置信息
+func sync_position(send_position: Vector2)-> void:
 	GameRunning.sync_with_player_position_dic(send_position)
-
+	
+# 同步玩家属性信息
+func _sync_infomation(send_information: Dictionary) -> void:
+	GameRunning.sync_with_player_information(send_information)
+	
 # 场景原因	
 func change_all_scene(path: String) -> void:
 	# 服务器切换场景
@@ -86,8 +90,13 @@ func get_player_list()				-> Array:
 func get_player_position_dic()						-> Dictionary:
 	return GameRunning.player_position_dic
 
+# 更新主机玩家位置
 func change_main_player_position(main_position: Vector2)			-> void:
 	GameRunning.server_position = main_position
+	
+# 更新主机玩家信息
+func change_main_player_infomation(main_information: Dictionary)	-> void:
+	GameRunning.server_dic = main_information
 	
 # 发送信息
 func send_message(msg: String) 		-> void:
@@ -104,7 +113,11 @@ func is_connect() -> bool:
 		return false
 
 	return peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED
-	
+
+# 得到玩家网络ID
+func get_player_id() -> int:
+	return multiplayer.get_unique_id()
+		
 # 切换场景广播
 @rpc("any_peer", "reliable")
 func rpc_change_scene(path: String):

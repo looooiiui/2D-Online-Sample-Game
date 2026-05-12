@@ -1,15 +1,25 @@
 extends Node2D
 
 @export var player_position_dic:		Dictionary[String, Vector2]		= {}
+@export var player_information:			Dictionary[String, Dictionary]	= {}
 @export var player_list:				Array[String]					= []
 @export var player_chat_messages:		Array[String]					= []
 @export var max_chat_num:				int								= 10
 
 #服务器主玩家地址
-var server_position: 					Vector2							= Vector2(0, 0)
+var server_position: 			 		Vector2				= Vector2(0, 0)
+var server_dic:							Dictionary			= {}
+
+func _physics_process(delta: float) -> void:
+	print(player_information)
+
 # 外置调用同步API
 func sync_with_player_position_dic(send_position: Vector2 = Vector2(0, 0)):
 	_sync_with_player_position_dic.rpc(send_position)
+
+# 玩家属性信息发送
+func sync_with_player_information(send_information: Dictionary = {}):
+	_sync_with_player_information.rpc(send_information)
 
 func send_player_message(msg: String):
 	# 存入格式 [player_id] : information
@@ -36,12 +46,37 @@ func _sync_with_player_position_dic(send_position: Vector2 = Vector2(0, 0)) 				
 		player_position_dic["1"]		= server_position
 		player_list_get.rpc(player_position_dic)
 		
+# 发送玩家离散数据
+@rpc("any_peer", "unreliable")
+func _sync_with_player_information(send_information: Dictionary = {})	-> void:
+	# 更新玩家数据
+	if multiplayer.get_unique_id() == 1:
+		# 得到远程ID
+		var player_id: String = str(multiplayer.get_remote_sender_id())
+		#未连接退出
+		if player_id == "0":
+			return
+			
+		# 防止接收空数据
+		if send_information == {}:
+			return
+
+		player_information[player_id] = send_information
+		player_information["1"]	  = server_dic
+		player_list_information.rpc(player_information)
+	
 @rpc("authority", "reliable")
 func player_list_get(get_player_position_dic: Dictionary) 				-> void:
 	# 服务器端发送玩家列表
 	if multiplayer.get_unique_id() != 1:
 		player_position_dic = get_player_position_dic
-		
+	
+@rpc("authority", "reliable")
+func player_list_information(get_player_information: Dictionary)		-> void:
+	# 服务器端发送玩家信息
+	if multiplayer.get_unique_id() != 1:
+		player_information = get_player_information	
+	
 # 玩家聊天信息广播
 @rpc("any_peer", "reliable")
 func rpc_player_chat(msg: String):

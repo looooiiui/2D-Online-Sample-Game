@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://crmdoylmr6phf"]
+
+[ext_resource type="Script" uid="uid://cvovnrujq146p" path="res://03_Game/PlayerUi/player_ui.gd" id="1_sbhqv"]
+[ext_resource type="Script" uid="uid://cnoliy7aitpxg" path="res://03_Game/PlayerUi/PlayerInformation/player_ui.gd" id="2_mvv0v"]
+
+[node name="PlayerUi" type="CanvasLayer" unique_id=1676546683]
+script = ExtResource("1_sbhqv")
+
+[node name="PlayerInformation" type="Control" parent="." unique_id=1580625063 node_paths=PackedStringArray("Player_Hp")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_mvv0v")
+Player_Hp = NodePath("VBox/PlayerHp")
+
+[node name="VBox" type="VBoxContainer" parent="PlayerInformation" unique_id=1592475961]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerHp" type="Label" parent="PlayerInformation/VBox" unique_id=1762848319]
+layout_mode = 2
+text = "当前血量"
