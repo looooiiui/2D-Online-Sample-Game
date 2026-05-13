@@ -17,7 +17,12 @@ func _physics_process(delta: float) -> void:
 func _mulitplayer_runner() 				-> void:
 	if player_list != Server.get_player_list():
 		player_list = Server.get_player_list()
-	
+		# 遍历踢出玩家
+		for delete_index in player_dic:
+			if !player_list.has(delete_index):
+				player_dic[delete_index].queue_free()
+				player_dic.erase(delete_index)
+			
 
 #初始化多人游戏实例
 func _initialize_mulitplayer()			-> void:
@@ -25,7 +30,9 @@ func _initialize_mulitplayer()			-> void:
 	#加入玩家
 	for player_id in player_list:
 		var player_instantiation = InstantiationTool.instantiationAny(PlayerScene, self, Vector2(500, 500))
-		player_instantiation.player_id = player_id
+		# 玩家分组加ID
+		player_instantiation.change_player_id(player_id)
+		player_instantiation.add_to_group("player")
 		player_dic[player_id] = player_instantiation
 
 # 返回玩家总列表

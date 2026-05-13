@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ctjhoql4ktbim" path="res://03_Game/Player/player.gd" id="1_ok6uv"]
 [ext_resource type="Texture2D" uid="uid://co30r6ae146hy" path="res://icon.svg" id="2_mg1oj"]
+[ext_resource type="PackedScene" uid="uid://c8s4syjsfff3e" path="res://03_Game/PlayerUi/PlayerBlood/player_blood.tscn" id="3_mg1oj"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1394657161]
 script = ExtResource("1_ok6uv")
@@ -10,3 +11,6 @@ script = ExtResource("1_ok6uv")
 
 [node name="Body" type="Sprite2D" parent="SPRITE" unique_id=431155970]
 texture = ExtResource("2_mg1oj")
+
+[node name="PlayerBlood" parent="." unique_id=1561830128 instance=ExtResource("3_mg1oj")]
+top_level = true

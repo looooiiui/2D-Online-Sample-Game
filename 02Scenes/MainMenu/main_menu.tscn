@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://jp5lkfu84nwj" path="res://02Scenes/MainMenu/WindowsMenu/windows_menu.gd" id="2_tx7fq"]
 [ext_resource type="Script" uid="uid://dq4rxnmt527ku" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/OnlineWindows/online_windows.gd" id="3_5k28i"]
 [ext_resource type="Script" uid="uid://dyrfv2w8uqo6i" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/HostWindows/host.gd" id="4_jhj0f"]
-[ext_resource type="PackedScene" uid="uid://cwrgaoibq5i8j" path="res://03_Game/PlayerList/PlayerList/player_list.tscn" id="5_0k5lx"]
-[ext_resource type="PackedScene" uid="uid://kms37wdg43jk" path="res://03_Game/PlayerList/single_player.tscn" id="5_2tkww"]
+[ext_resource type="PackedScene" uid="uid://cwrgaoibq5i8j" path="res://03_Game/Server/PlayerList/PlayerList/player_list.tscn" id="5_0k5lx"]
+[ext_resource type="PackedScene" uid="uid://kms37wdg43jk" path="res://03_Game/Server/PlayerList/single_player.tscn" id="5_2tkww"]
 [ext_resource type="Script" uid="uid://cr3py577bv4lc" path="res://02Scenes/MainMenu/WindowsMenu/OnlineGroup/JoinWindows/join.gd" id="5_7ym5f"]
-[ext_resource type="Script" uid="uid://by8t1dlslnntl" path="res://03_Game/PlayerList/PlayerList/player_list.gd" id="5_vf6a1"]
+[ext_resource type="Script" uid="uid://by8t1dlslnntl" path="res://03_Game/Server/PlayerList/PlayerList/player_list.gd" id="5_vf6a1"]
 [ext_resource type="PackedScene" uid="uid://bb6bv047gdbw3" path="res://03_Game/Server/PlayerChatBar/player_char_bar.tscn" id="6_af6no"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_oajpe"]

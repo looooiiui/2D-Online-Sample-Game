@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c8s4syjsfff3e"]
+
+[ext_resource type="Script" uid="uid://c6hji31mjhtek" path="res://03_Game/PlayerUi/PlayerBlood/BloodSprite/blood_sprite.gd" id="1_3rbe7"]
+[ext_resource type="Script" uid="uid://dgl0eojer6kcy" path="res://03_Game/PlayerUi/PlayerBlood/player_blood.gd" id="1_rxpdc"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_i4ild"]
+
+[node name="PlayerBlood" type="Node2D" unique_id=1561830128]
+script = ExtResource("1_rxpdc")
+_follow_offset = Vector2(0, -100)
+
+[node name="BloodSprite" type="Node2D" parent="." unique_id=737796755 node_paths=PackedStringArray("_Player_Blood_Sprite")]
+script = ExtResource("1_3rbe7")
+_Player_Blood_Sprite = NodePath("Blood")
+
+[node name="Blood" type="Sprite2D" parent="BloodSprite" unique_id=1773929700]
+self_modulate = Color(1, 0, 0.12156863, 1)
+position = Vector2(-127, 0)
+scale = Vector2(254, 12)
+texture = SubResource("CanvasTexture_i4ild")
+offset = Vector2(0.5, 0)

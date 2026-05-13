@@ -2,7 +2,11 @@ extends Node
 
 class_name InstantiationTool
 
-static func instantiationAny(any_case: PackedScene, any_node: Variant, extra_position: Vector2 = Vector2(0, 0)) -> Variant:
+static func instantiationAny(
+	any_case: PackedScene, 
+	any_node: Variant, 
+	extra_position: Vector2 = Vector2(0, 0)
+) -> Variant:
 	#检查节点输入是否存在
 	if any_node == null:
 		push_error("实例化失败: 传入的实例节点为空")

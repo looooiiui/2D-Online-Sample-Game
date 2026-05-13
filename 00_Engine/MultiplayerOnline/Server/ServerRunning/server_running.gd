@@ -37,11 +37,12 @@ func online_player_connect(peer_id: int) 			-> void:
 		print("客户端接收: 新玩家加入: ID: %d" % peer_id)
 
 #	接收玩家断连接信号，更新玩家列表
-func online_player_disconnect(peer_id: int)						-> void:
-	
+func online_player_disconnect(disconnect_peer_id: int)						-> void:
+	# 先转换为字典种存储的字符串类型
+	var peer_id: String = str(disconnect_peer_id)
 	# 断开连接清空数据(只有服务端)
 	if multiplayer.get_unique_id() == 1:
-		player_list.erase(str(peer_id))
+		player_list.erase(peer_id)
 		# 服务器端发送玩家列表
 		player_list_get.rpc(player_list)
 

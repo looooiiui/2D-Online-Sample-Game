@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cwrgaoibq5i8j"]
 
-[ext_resource type="Script" uid="uid://by8t1dlslnntl" path="res://03_Game/PlayerList/PlayerList/player_list.gd" id="1_atyvx"]
-[ext_resource type="PackedScene" uid="uid://kms37wdg43jk" path="res://03_Game/PlayerList/single_player.tscn" id="2_3drec"]
+[ext_resource type="Script" uid="uid://by8t1dlslnntl" path="res://03_Game/Server/PlayerList/PlayerList/player_list.gd" id="1_atyvx"]
+[ext_resource type="PackedScene" uid="uid://kms37wdg43jk" path="res://03_Game/Server/PlayerList/single_player.tscn" id="2_3drec"]
 
 [node name="PlayerList" type="Control" unique_id=1434962450]
 layout_mode = 3

@@ -40,9 +40,9 @@ func _on_connected_fail() -> void:
 	#连接超时发送连接超时信号
 	server_connect_failed.emit()
 
-#断开客户端连接
+# 断开客户端连接
 func close_client() -> bool:
-	#获取客户端对等体并清空
+	# 获取客户端对等体并清空
 	var peer = multiplayer.multiplayer_peer
 	if peer == null:
 		return false

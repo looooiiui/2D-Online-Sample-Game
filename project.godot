@@ -30,6 +30,10 @@ window/stretch/scale=0.8
 
 project/assembly_name="2Dmultiplayer"
 
+[global_group]
+
+player=""
+
 [gui]
 
 theme/custom="uid://cay2mpu872gbh"
